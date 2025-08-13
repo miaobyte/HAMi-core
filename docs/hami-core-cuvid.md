@@ -48,32 +48,32 @@ libvgpu#nm -D /lib/x86_64-linux-gnu/libnvcuvid.so.1 | cut -c 17- | grep -E '(Nv|
 ```mermaid
 flowchart TD
     %% CUDA 初始化阶段
-    A[cuInit(0): 初始化CUDA驱动]
-    B[cuDeviceGet(): 获取设备]
-    C[cuCtxCreate(): 创建CUDA上下文]
+    A["cuInit(0): 初始化CUDA驱动"]
+    B["cuDeviceGet(): 获取设备"]
+    C["cuCtxCreate(): 创建CUDA上下文"]
 
     %% 视频解析器创建与回调设置
-    D[cuvidCreateVideoParser(): 创建视频解析器]
-    E[设置CUVIDPARSERPARAMS回调函数]
-    E1[pfnSequenceCallback: 处理视频序列头]
-    E2[pfnDecodePicture: 处理解码请求]
-    E3[pfnDisplayPicture: 处理解码完成帧]
+    D["cuvidCreateVideoParser(): 创建视频解析器"]
+    E["设置CUVIDPARSERPARAMS回调函数"]
+    E1["pfnSequenceCallback: 处理视频序列头"]
+    E2["pfnDecodePicture: 处理解码请求"]
+    E3["pfnDisplayPicture: 处理解码完成帧"]
 
     %% 解码器创建与解码流程
-    F[序列回调: cuvidCreateDecoder() 创建解码器]
-    G[解码回调: cuvidDecodePicture() 解码帧]
-    H[显示回调: cuvidMapVideoFrame() 访问解码帧]
-    I[显示回调: cuvidUnmapVideoFrame() 释放帧资源]
+    F["序列回调: cuvidCreateDecoder() 创建解码器"]
+    G["解码回调: cuvidDecodePicture() 解码帧"]
+    H["显示回调: cuvidMapVideoFrame() 访问解码帧"]
+    I["显示回调: cuvidUnmapVideoFrame() 释放帧资源"]
 
     %% 数据输入与解析
-    J[循环输入视频数据]
-    K[cuvidParseVideoData(): 解析数据]
-    L[CUVIDSOURCEDATAPACKET: 数据包结构传递]
+    J["循环输入视频数据"]
+    K["cuvidParseVideoData(): 解析数据"]
+    L["CUVIDSOURCEDATAPACKET: 数据包结构传递"]
 
     %% 资源销毁阶段
-    M[cuvidDestroyVideoParser(): 销毁解析器]
-    N[cuvidDestroyDecoder(): 销毁解码器]
-    O[cuCtxDestroy(): 销毁CUDA上下文]
+    M["cuvidDestroyVideoParser(): 销毁解析器"]
+    N["cuvidDestroyDecoder(): 销毁解码器"]
+    O["cuCtxDestroy(): 销毁CUDA上下文"]
 
     %% 流程连接
     A --> B
@@ -94,12 +94,4 @@ flowchart TD
     J --> M
     M --> N
     N --> O
-
-    %% 说明
-    classDef phase fill:#f9f,stroke:#333,stroke-width:2px;
-    class A,B,C phase;
-    class D,E,E1,E2,E3 phase;
-    class F,G,H,I phase;
-    class J,K,L phase;
-    class M,N,O phase;
 ```
