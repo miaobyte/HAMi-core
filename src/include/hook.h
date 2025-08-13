@@ -8,6 +8,8 @@ typedef struct {
 
 #define FIND_ENTRY(table, sym) ({ (table)[OVERRIDE_##sym].fn_ptr; })
 
+typedef void* (*fp_dlsym)(void*, const char*);
+
 
 #define CUDA_FUNCTIONS(X) \
     /* cuInit Part */ \

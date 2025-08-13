@@ -4,7 +4,6 @@
 #include "include/multi_func_hook.h"
 #include "include/hook.h"
 
-typedef void* (*fp_dlsym)(void*, const char*);
 extern fp_dlsym real_dlsym;
 
 entry_t cuda_library_entry[]= {

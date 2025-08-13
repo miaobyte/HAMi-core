@@ -3,13 +3,13 @@
 
 #include <dlfcn.h>
 #include <cuda.h>
-#include "include/nvml_prefix.h"
 #include <nvml.h>
 #include <pthread.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <signal.h>
 
+#include "include/nvml_prefix.h"
 #include "include/log_utils.h"
 #include "static_config.h"
 //#include "memory_limit.h"
@@ -55,8 +55,6 @@ extern void* _dl_sym(void*, const char*, void*);
 
 void* __dlsym_hook_section(void* handle, const char* symbol);
 void* __dlsym_hook_section_nvml(void* handle, const char* symbol);
-
-typedef void* (*fp_dlsym)(void*, const char*);
 
 #else
 #error error, neither __GLIBC__ nor __GNUC__ defined

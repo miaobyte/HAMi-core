@@ -18,7 +18,6 @@ _Static_assert(sizeof(nvml_library_entry)/sizeof(entry_t) == NVML_ENTRY_END,
 pthread_once_t init_virtual_map_pre_flag = PTHREAD_ONCE_INIT;
 pthread_once_t init_virtual_map_post_flag = PTHREAD_ONCE_INIT;
 
-typedef void* (*fp_dlsym)(void*, const char*);
 extern fp_dlsym real_dlsym;
 extern int virtual_nvml_devices;
 extern int cuda_to_nvml_map_array[16];
