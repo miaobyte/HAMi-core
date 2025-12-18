@@ -223,7 +223,7 @@ int need_cuda_virtualize() {
         return 0;
     }
     int fromenv = getenvcount();
-    CUresult res = CUDA_OVERRIDE_CALL(cuda_library_entry,cuDeviceGetCount,&count1);
+    CUresult res =  cuDeviceGetCount(&count1);
     if (res != CUDA_SUCCESS) {
         return 1;
     }

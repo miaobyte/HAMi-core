@@ -35,7 +35,7 @@ size_t round_up(size_t size, size_t unit) {
 
 int oom_check(const int dev, size_t addon) {
     int count1=0;
-    CUDA_OVERRIDE_CALL(cuda_library_entry,cuDeviceGetCount,&count1);
+    cuDeviceGetCount(&count1);
     CUdevice d;
     if (dev==-1)
         cuCtxGetDevice(&d);
@@ -264,13 +264,13 @@ int add_chunk_async(CUdeviceptr *address, size_t size, CUstream hStream) {
     }
     *address = e->entry->address;
     CUmemoryPool pool;
-    res = CUDA_OVERRIDE_CALL(cuda_library_entry,cuDeviceGetMemPool,&pool,dev);
+    res = cuDeviceGetMemPool(&pool,dev);
     if (res != CUDA_SUCCESS) {
         LOG_ERROR("cuDeviceGetMemPool failed res=%d",res);
         return res;
     }
     size_t poollimit;
-    res = CUDA_OVERRIDE_CALL(cuda_library_entry,cuMemPoolGetAttribute,pool,CU_MEMPOOL_ATTR_RESERVED_MEM_HIGH,&poollimit);
+    res = cuMemPoolGetAttribute(pool,CU_MEMPOOL_ATTR_RESERVED_MEM_HIGH,&poollimit);
     if (res != CUDA_SUCCESS) {
         LOG_ERROR("cuMemPoolGetAttribute failed res=%d",res);
         return res;
